@@ -39,11 +39,6 @@ fun Route.pokeRouter(pokeService: PokeService) {
             val ok = pokeService.updatePoke(body)
             if (ok) call.respond(body) else call.respondText("failed", status = HttpStatusCode.BadRequest)
         }
-        patch {
-            val body = call.receive<UpdatePoke>()
-            val ok = pokeService.updatePoke(body)
-            if (ok) call.respond(body) else call.respondText("failed", status = HttpStatusCode.BadRequest)
-        }
 
         delete {
             val body = call.receive<Poke>()
