@@ -2,7 +2,7 @@ package com.example.repository
 
 import com.example.model.Poke
 import com.example.model.UpdatePoke
-import com.example.utils.MongoClient
+import com.mongodb.client.MongoCollection
 import org.litote.kmongo.*
 
 interface IPokeService {
@@ -13,9 +13,7 @@ interface IPokeService {
     suspend fun deletePoke(body: Poke): Boolean
 }
 
-class PokeService : IPokeService {
-    private val col = MongoClient.getInstance()
-
+class PokeService(private val col: MongoCollection<Poke>) : IPokeService {
     override suspend fun getPokes(): List<Poke> = col.find().toList()
     override suspend fun getPoke(id: String): Poke? = col.findOne(Poke::id eq id.toInt())
 

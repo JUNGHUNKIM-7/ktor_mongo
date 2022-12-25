@@ -10,7 +10,6 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Route.pokeRouter(pokeService: PokeService) {
-
     route("/pokes") {
         get {
             val pokes = pokeService.getPokes()
@@ -35,6 +34,11 @@ fun Route.pokeRouter(pokeService: PokeService) {
             if (ok) call.respond(body) else call.respondText("failed", status = HttpStatusCode.BadRequest)
         }
 
+        patch {
+            val body = call.receive<UpdatePoke>()
+            val ok = pokeService.updatePoke(body)
+            if (ok) call.respond(body) else call.respondText("failed", status = HttpStatusCode.BadRequest)
+        }
         patch {
             val body = call.receive<UpdatePoke>()
             val ok = pokeService.updatePoke(body)
