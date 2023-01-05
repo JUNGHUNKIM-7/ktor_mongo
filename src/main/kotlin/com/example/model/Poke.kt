@@ -7,7 +7,7 @@ import org.litote.kmongo.*
 
 @Serializable
 data class Poke(
-//    @Contextual @SerialName("_id") val bsonId: Id<Poke> = newId(),
+    @Contextual @SerialName("_id") val bsonId: Id<Poke> = newId(),
     val attack: Int,
     val defense: Int,
     val hp: Int,

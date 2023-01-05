@@ -1,6 +1,8 @@
 package com.example
 
 import com.example.plugins.*
+import com.example.repository.PokeService
+import com.example.utils.MongoClient
 import de.sharpmind.ktor.EnvConfig
 import io.ktor.server.application.*
 import io.ktor.http.*
@@ -14,7 +16,10 @@ fun main(args: Array<String>): Unit =
 @Suppress("unused")
 fun Application.module(testing: Boolean = false) {
     EnvConfig.initConfig(environment.config)
+    val col = MongoClient.getInstance()
+    val pokeService = PokeService(col)
+    graphqlModule(pokeService = pokeService)
+    pokeRouting(pokeService = pokeService)
     configureCors()
-    configureRouting()
     configureSerialization()
 }

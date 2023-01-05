@@ -2,6 +2,8 @@ val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
 val env_version: String by project
+val kmongo_version: String by project
+val kgraphql_version: String by project
 
 plugins {
     kotlin("jvm") version "1.7.22"
@@ -24,6 +26,7 @@ repositories {
 
 dependencies {
     implementation("de.sharpmind.ktor:ktor-env-config:$env_version")
+    implementation("org.litote.kmongo:kmongo:$kmongo_version")
     implementation("io.ktor:ktor-server-cors:$ktor_version")
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-swagger:$ktor_version")
@@ -33,5 +36,12 @@ dependencies {
     implementation("ch.qos.logback:logback-classic:$logback_version")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
-    implementation("org.litote.kmongo:kmongo:4.8.0")
+    implementation("com.apurebase:kgraphql:$kgraphql_version")
+    implementation("com.apurebase:kgraphql-ktor:$kgraphql_version")
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions {
+        jvmTarget = "11"
+    }
 }

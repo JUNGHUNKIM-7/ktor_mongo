@@ -8,7 +8,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Route.customerRouter() {
-    val customers = mutableListOf<CustomerModel>(
+    val customers = mutableListOf(
         CustomerModel("test", "test2")
     )
 
